@@ -1,5 +1,6 @@
+import a1 from "./a1.jpg";
 import logo from "./logo.svg";
-import "./App.css";
+import "./App.scss";
 
 function App() {
   const data = [
@@ -37,12 +38,27 @@ function App() {
 
   return (
     <div className="App">
-      <header>
-        <div className="flex c1">Name</div>
-        <div className="flex c2">Device</div>
-        <div className="flex c3">Path</div>
-        <div className="flex c4">Status</div>
-      </header>
+      <div id="tools" data-testid="tools" className="">
+        <div id="invertSelection" data-testid="invertSelection">
+          []
+        </div>
+        <div id="count" data-testid="count">
+          Selected #
+        </div>
+        <div id="" data-testid>
+          Download Selected
+        </div>
+      </div>
+      <img id="a1" src={a1}></img>
+      <div id="directory">
+        <div className="row">
+          <div className=" c1">[]</div>
+          <div className=" c2">Name</div>
+          <div className=" c3">Device</div>
+          <div className=" c4">Path</div>
+          <div className=" c5">Status</div>
+        </div>
+      </div>
     </div>
   );
 }

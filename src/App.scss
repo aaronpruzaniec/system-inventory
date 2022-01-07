@@ -1,0 +1,45 @@
+#a1 {
+  position: absolute;
+  top: 0;
+  opacity: 0.2;
+  pointer-events: none;
+}
+html {
+  font-size: 100%;
+}
+#directory {
+  .row {
+    display: flex;
+  }
+  .c1 {
+    flex: 0 0 64px;
+  }
+  .c2 {
+    flex: 0 0 166px;
+  }
+  .c3 {
+    flex: 0 0 166px;
+  }
+  .c4 {
+    flex: 0 0 166px;
+  }
+  .c5 {
+    flex: 0 0 166px;
+  }
+}
+
+#tools {
+  padding-top: 25px;
+  padding-bottom: 25px;
+
+  * {
+    display: inline;
+  }
+  #invertSelection {
+    padding-left: 19px;
+    padding-right: 17px;
+  }
+  #count {
+    padding-right: 80px;
+  }
+}
