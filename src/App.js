@@ -44,13 +44,20 @@ export default function App() {
     ],
     selected: {},
   });
-  let key = data.data.map((x) => x.status).filter((x) => x == "available");
+  // Generate key pair of entries with status available
+  // ex. ["available","anetsh.exe"],["available","auxtheme.dll"]]
+  let key = data.data
+    .map((x) => [x.status, x.name])
+    .filter((x) => x[0] == "available")
+    .map((x) => x[1]);
 
   function invertSelection(operation) {
-    let update = {};
-    update = data;
-    update.selected = {};
-    setData({ data: data.data, selected: {} });
+    // operation is either 'all' or 'none'
+    if (operation == "none") {
+      setData({ data: data.data, selected: {} });
+    } else if (operation == "all") {
+      setData({ data: data.data, selected: key });
+    }
   }
 
   const processList = data.data.map(({ name, device, path, status }, index) => (
