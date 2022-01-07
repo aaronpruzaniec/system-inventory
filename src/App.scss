@@ -1,3 +1,8 @@
+// Utility Classes
+.titleCase {
+  text-transform: tit;
+}
+// Body classes
 #a1 {
   position: absolute;
   top: 0;
@@ -7,45 +12,26 @@
 html {
   font-size: 100%;
 }
-#directory {
-  .row {
-    display: flex;
-    padding: 0.5em 0;
-    img {
-      width: 14px;
-      height: auto;
-    }
-  }
-  .c1 {
-    flex: 0 0 57px;
-    padding-left: 14px;
-  }
-  .c2 {
-    flex: 0 0 166px;
-  }
-  .c3 {
-    flex: 0 0 166px;
-  }
-  .c4 {
-    flex: 0 0 520px;
-  }
-  .c5 {
-    flex: 0 0 166px;
-  }
+.header {
+  font-size: 0.78rem;
 }
-
 #tools {
   padding-top: 25px;
-  padding-bottom: 25px;
-
+  padding-bottom: 17px;
   * {
     display: inline;
+  }
+  img {
+    width: 10px;
+    height: auto;
+    padding-right: 0.25em;
+    display: inline-block;
   }
   #invertSelection {
     padding-left: 19px;
     padding-right: 17px;
   }
   #count {
-    padding-right: 80px;
+    padding-right: 37px;
   }
 }

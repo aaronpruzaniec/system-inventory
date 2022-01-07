@@ -2,8 +2,11 @@ import React, { useState } from "react";
 
 import Row from "./Components/Row/Row";
 
-import a1 from "./a1.jpg";
 import "./App.scss";
+import download from "./download.svg";
+import inputOff from "./inputOff.svg";
+import inputOn from "./inputOn.svg";
+import inputNeutral from "./inputNeutral.svg";
 
 export default function App() {
   const [data, setData] = useState({
@@ -41,6 +44,14 @@ export default function App() {
     ],
     selected: {},
   });
+  let key = data.data.map((x) => x.status).filter((x) => x == "available");
+
+  function invertSelection(operation) {
+    let update = {};
+    update = data;
+    update.selected = {};
+    setData({ data: data.data, selected: {} });
+  }
 
   const processList = data.data.map(({ name, device, path, status }, index) => (
     <div key={index}>
@@ -57,30 +68,40 @@ export default function App() {
 
   return (
     <div className="App">
-      <img id="a1" src={a1}></img>
       <div id="tools" data-testid="tools" className="">
         <div id="invertSelection" data-testid="invertSelection">
-          []
-        </div>
-        <div id="count" data-testid="count">
+          {/* Code for determining state of invert selector */}
+          {/* 1. If no items are selected show input off, click adds all */}
+          {/* 2. If maximum amount of selections show input on, click deselects all */}
+          {/* 3. If more than 0 items are selected, but less than maximum showed neutral */}
+          {Object.entries(data.selected).length == 0 ? (
+            <img src={inputOff} onClick={() => invertSelection("all")} />
+          ) : Object.entries(data.selected).length == key.length ? (
+            <img src={inputOn} onClick={() => invertSelection("none")} />
+          ) : (
+            <img src={inputNeutral} />
+          )}
+
           {Object.entries(data.selected).length > 0
             ? "Selected " + Object.entries(data.selected).length
             : "None selected"}
         </div>
         <div id="" data-testid>
-          Download Selected
+          <img src={download} />
+          {"Download Selected"}
         </div>
       </div>
       <div id="directory">
-        <div className="row">
-          <div className=" c1">[]</div>
-          <div className=" c2">Name</div>
-          <div className=" c3">Device</div>
-          <div className=" c4">Path</div>
-          <div className=" c5">Status</div>
+        <div className="row header">
+          <div className="column">[]</div>
+          <div className="column">Name</div>
+          <div className="column">Device</div>
+          <div className="column">Path</div>
+          <div className="column">Status</div>
         </div>
         {processList}
       </div>
+      {Object.entries(data.selected).length}
     </div>
   );
 }
