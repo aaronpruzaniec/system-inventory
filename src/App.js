@@ -44,19 +44,22 @@ export default function App() {
     ],
     selected: {},
   });
-  // Generate key pair of entries with status available
-  // ex. ["available","anetsh.exe"],["available","auxtheme.dll"]]
+  // Generate array of entries names whos status is available
+  // ex. [[anetsh.exe"],["auxtheme.dll"]]
   let key = data.data
     .map((x) => [x.status, x.name])
     .filter((x) => x[0] == "available")
     .map((x) => x[1]);
+  let selectLength = Object.entries(data.selected).length;
 
   function invertSelection(operation) {
     // operation is either 'all' or 'none'
     if (operation == "none") {
       setData({ data: data.data, selected: {} });
     } else if (operation == "all") {
-      setData({ data: data.data, selected: key });
+      let newKey = {};
+      key.map((x) => (newKey[x] = true));
+      setData({ data: data.data, selected: newKey });
     }
   }
 
@@ -81,17 +84,15 @@ export default function App() {
           {/* 1. If no items are selected show input off, click adds all */}
           {/* 2. If maximum amount of selections show input on, click deselects all */}
           {/* 3. If more than 0 items are selected, but less than maximum showed neutral */}
-          {Object.entries(data.selected).length == 0 ? (
+          {selectLength == 0 ? (
             <img src={inputOff} onClick={() => invertSelection("all")} />
-          ) : Object.entries(data.selected).length == key.length ? (
+          ) : selectLength == key.length ? (
             <img src={inputOn} onClick={() => invertSelection("none")} />
           ) : (
             <img src={inputNeutral} />
           )}
 
-          {Object.entries(data.selected).length > 0
-            ? "Selected " + Object.entries(data.selected).length
-            : "None selected"}
+          {selectLength > 0 ? "Selected " + selectLength : "None selected"}
         </div>
         <div id="" data-testid>
           <img src={download} />
@@ -108,7 +109,6 @@ export default function App() {
         </div>
         {processList}
       </div>
-      {Object.entries(data.selected).length}
     </div>
   );
 }
