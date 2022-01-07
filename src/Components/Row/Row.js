@@ -1,39 +1,62 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import "./Row.scss";
 
-function Row(props) {
-  const [rowData, setRowData] = useState(props);
-  const [test, setTest] = useState(false);
+// Destructuring props in the function arguments.
+const Player = ({ allPlayers, removePlayer, name, yearsPro, position }) => {
+  const handleRemove = () => {
+    let handleData2 = new Object();
+    handleData2.data = allPlayers.data;
+    handleData2.selected = allPlayers.selected;
+    allPlayers.selected[name] = true;
+    let handleData = {
+      data: [
+        {
+          name: "asmss.exe",
+          device: "Stark",
+          path: "\\Device\\HarddiskVolume2\\Windows\\System32\\smss.exe",
+          status: "scheduled",
+        },
+        {
+          name: "anetsh.exe",
+          device: "Targaryen",
+          path: "\\Device\\HarddiskVolume2\\Windows\\System32\\netsh.exe",
+          status: "available",
+        },
+        {
+          name: "auxtheme.dll",
+          device: "Lanniester",
+          path: "\\Device\\HarddiskVolume1\\Windows\\System32\\uxtheme.dll",
+          status: "available",
+        },
+        {
+          name: "acryptbase.dll",
+          device: "Martell",
+          path: "\\Device\\HarddiskVolume1\\Windows\\System32\\cryptbase.dll",
+          status: "scheduled",
+        },
+        {
+          name: "a7za.exe",
+          device: "Baratheon",
+          path: "\\Device\\HarddiskVolume1\\temp\\7za.exe",
+          status: "scheduled",
+        },
+      ],
+      selected: { "auxtheme.dll": true },
+    };
+    //handleData.selected[name] = true;
+    console.log(handleData);
+    console.log(handleData2);
+    removePlayer(handleData2);
+  };
 
-  useEffect(() => {
-    setRowData(props);
-  }, [props]);
-
-  function handleChange(event) {
-    let handleData2 = {};
-    handleData2 = props.data;
-    handleData2.selected[props.name] = true;
-    props.setData(handleData2);
-    // handleData2.data = props.state;
-    // handleData2.selected = allPlayers.selected;
-    // allPlayers.selected[name] = true;
-    // console.log(handleData);
-    // console.log(handleData2);
-    // removePlayer(handleData2);
-  }
   return (
-    <div
-      className={`row ${props.data[props.name] ? "selected" : null}`}
-      onClick={handleChange}
+    <span
+      className={allPlayers.selected[name] ? "bold" : null}
+      onClick={handleRemove}
     >
-      <div className={`c1`}>
-        [{test} {Object.entries(props.state).length}]
-      </div>
-      <div className={`c2`}>{rowData.name}</div>
-      <div className={`c3`}>{rowData.device}</div>
-      <div className={`c4`}>{rowData.path}</div>
-      <div className={`c5`}>{rowData.status}</div>
-    </div>
+      {name}
+    </span>
   );
-}
+};
 
-export default Row;
+export default Player;
