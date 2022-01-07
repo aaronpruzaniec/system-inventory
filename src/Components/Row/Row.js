@@ -9,19 +9,24 @@ function Row(props) {
   }, [props]);
 
   function handleChange(event) {
-    //props.select(props.name);
-    let a = props.state;
-    a[props.name] = true;
-    props.setState(a);
-    setTest(true);
+    let handleData2 = {};
+    handleData2 = props.data;
+    handleData2.selected[props.name] = true;
+    props.setData(handleData2);
+    // handleData2.data = props.state;
+    // handleData2.selected = allPlayers.selected;
+    // allPlayers.selected[name] = true;
+    // console.log(handleData);
+    // console.log(handleData2);
+    // removePlayer(handleData2);
   }
   return (
     <div
-      className={`row ${props.state[props.name] ? "selected" : null}`}
+      className={`row ${props.data[props.name] ? "selected" : null}`}
       onClick={handleChange}
     >
       <div className={`c1`}>
-        [{test} {props.state ? "0" : "1"}]
+        [{test} {Object.entries(props.state).length}]
       </div>
       <div className={`c2`}>{rowData.name}</div>
       <div className={`c3`}>{rowData.device}</div>

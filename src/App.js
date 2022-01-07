@@ -8,38 +8,41 @@ import "./App.scss";
 
 function App() {
   const [state, setState] = useState({});
-  const data = [
-    {
-      name: "smss.exe",
-      device: "Stark",
-      path: "\\Device\\HarddiskVolume2\\Windows\\System32\\smss.exe",
-      status: "scheduled",
-    },
-    {
-      name: "netsh.exe",
-      device: "Targaryen",
-      path: "\\Device\\HarddiskVolume2\\Windows\\System32\\netsh.exe",
-      status: "available",
-    },
-    {
-      name: "uxtheme.dll",
-      device: "Lanniester",
-      path: "\\Device\\HarddiskVolume1\\Windows\\System32\\uxtheme.dll",
-      status: "available",
-    },
-    {
-      name: "cryptbase.dll",
-      device: "Martell",
-      path: "\\Device\\HarddiskVolume1\\Windows\\System32\\cryptbase.dll",
-      status: "scheduled",
-    },
-    {
-      name: "7za.exe",
-      device: "Baratheon",
-      path: "\\Device\\HarddiskVolume1\\temp\\7za.exe",
-      status: "scheduled",
-    },
-  ];
+  const [data, setData] = useState({
+    mock: [
+      {
+        name: "asmss.exe",
+        device: "Stark",
+        path: "\\Device\\HarddiskVolume2\\Windows\\System32\\smss.exe",
+        status: "scheduled",
+      },
+      {
+        name: "anetsh.exe",
+        device: "Targaryen",
+        path: "\\Device\\HarddiskVolume2\\Windows\\System32\\netsh.exe",
+        status: "available",
+      },
+      {
+        name: "auxtheme.dll",
+        device: "Lanniester",
+        path: "\\Device\\HarddiskVolume1\\Windows\\System32\\uxtheme.dll",
+        status: "available",
+      },
+      {
+        name: "acryptbase.dll",
+        device: "Martell",
+        path: "\\Device\\HarddiskVolume1\\Windows\\System32\\cryptbase.dll",
+        status: "scheduled",
+      },
+      {
+        name: "a7za.exe",
+        device: "Baratheon",
+        path: "\\Device\\HarddiskVolume1\\temp\\7za.exe",
+        status: "scheduled",
+      },
+    ],
+    selected: {},
+  });
 
   function select(newValue) {
     // let a = state;
@@ -48,7 +51,20 @@ function App() {
     //console.log(a);
   }
 
-  function exists(name) {}
+  const playersList = data.mock.map(({ name, device, path, status }) => (
+    <Row
+      key={name}
+      data={data}
+      name={name}
+      device={device}
+      path={path}
+      setData={setData}
+      setState={setState}
+      state={state}
+      status={status}
+      select={select}
+    ></Row>
+  ));
 
   return (
     <div className="App">
@@ -72,7 +88,8 @@ function App() {
           <div className=" c4">Path</div>
           <div className=" c5">Status</div>
         </div>
-        {data.map((x) => (
+        {playersList}
+        {/* {data.map((x) => (
           <Row
             key={x.name}
             name={x.name}
@@ -83,7 +100,7 @@ function App() {
             status={x.status}
             select={select}
           ></Row>
-        ))}
+        ))} */}
       </div>
       {/* {state} */}
     </div>
