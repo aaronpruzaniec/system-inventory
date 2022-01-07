@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+
 import Row from "./Components/Row/Row";
-// import "./App.scss";
+
+import a1 from "./a1.jpg";
+import "./App.scss";
 
 export default function App() {
-  const [players2, setPlayers2] = useState({
+  const [data, setData] = useState({
     data: [
       {
         name: "asmss.exe",
@@ -39,25 +42,43 @@ export default function App() {
     selected: {},
   });
 
-  const playersList = players2.data.map(
-    ({ name, device, path, status }, index) => (
-      <div key={index}>
-        <Row
-          allPlayers={players2}
-          removePlayer={setPlayers2}
-          name={name}
-          device={device}
-          path={path}
-          status={status}
-        />
-      </div>
-    )
-  );
+  const processList = data.data.map(({ name, device, path, status }, index) => (
+    <div key={index}>
+      <Row
+        data={data}
+        setData={setData}
+        name={name}
+        device={device}
+        path={path}
+        status={status}
+      />
+    </div>
+  ));
 
   return (
     <div className="App">
-      <h1>Team Members ({players2.data.length})</h1>
-      {playersList}
+      <img id="a1" src={a1}></img>
+      <div id="tools" data-testid="tools" className="">
+        <div id="invertSelection" data-testid="invertSelection">
+          []
+        </div>
+        <div id="count" data-testid="count">
+          Selected {Object.entries(data.selected).length}
+        </div>
+        <div id="" data-testid>
+          Download Selected
+        </div>
+      </div>
+      <div id="directory">
+        <div className="row">
+          <div className=" c1">[]</div>
+          <div className=" c2">Name</div>
+          <div className=" c3">Device</div>
+          <div className=" c4">Path</div>
+          <div className=" c5">Status</div>
+        </div>
+        {processList}
+      </div>
     </div>
   );
 }

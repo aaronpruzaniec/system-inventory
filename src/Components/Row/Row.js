@@ -1,61 +1,31 @@
 import React from "react";
 import "./Row.scss";
 
-// Destructuring props in the function arguments.
-const Player = ({ allPlayers, removePlayer, name, yearsPro, position }) => {
+const Player = ({ data, setData, name, status, device, path }) => {
   const handleRemove = () => {
-    let handleData2 = new Object();
-    handleData2.data = allPlayers.data;
-    handleData2.selected = allPlayers.selected;
-    allPlayers.selected[name] = true;
-    let handleData = {
-      data: [
-        {
-          name: "asmss.exe",
-          device: "Stark",
-          path: "\\Device\\HarddiskVolume2\\Windows\\System32\\smss.exe",
-          status: "scheduled",
-        },
-        {
-          name: "anetsh.exe",
-          device: "Targaryen",
-          path: "\\Device\\HarddiskVolume2\\Windows\\System32\\netsh.exe",
-          status: "available",
-        },
-        {
-          name: "auxtheme.dll",
-          device: "Lanniester",
-          path: "\\Device\\HarddiskVolume1\\Windows\\System32\\uxtheme.dll",
-          status: "available",
-        },
-        {
-          name: "acryptbase.dll",
-          device: "Martell",
-          path: "\\Device\\HarddiskVolume1\\Windows\\System32\\cryptbase.dll",
-          status: "scheduled",
-        },
-        {
-          name: "a7za.exe",
-          device: "Baratheon",
-          path: "\\Device\\HarddiskVolume1\\temp\\7za.exe",
-          status: "scheduled",
-        },
-      ],
-      selected: { "auxtheme.dll": true },
-    };
-    //handleData.selected[name] = true;
+    let handleData = new Object();
+    handleData.data = data.data;
+    handleData.selected = data.selected;
+    if (data.selected[name]) {
+      delete data.selected[name];
+    } else {
+      data.selected[name] = true;
+    }
     console.log(handleData);
-    console.log(handleData2);
-    removePlayer(handleData2);
+    setData(handleData);
   };
 
   return (
-    <span
-      className={allPlayers.selected[name] ? "bold" : null}
+    <div
+      className={`row ${data.selected[name] ? "bold" : null}`}
       onClick={handleRemove}
     >
-      {name}
-    </span>
+      <div className=" c1">[]</div>
+      <div className=" c2">{name}</div>
+      <div className=" c3">{device}</div>
+      <div className=" c4">{path}</div>
+      <div className=" c5">{status}</div>
+    </div>
   );
 };
 
