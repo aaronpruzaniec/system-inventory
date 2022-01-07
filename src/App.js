@@ -42,10 +42,10 @@ function App() {
   ];
 
   function select(newValue) {
-    let a = state;
-    a[newValue] = true;
-    setState(a);
-    console.log(a);
+    // let a = state;
+    // a[newValue] = true;
+    // setState(a);
+    //console.log(a);
   }
 
   function exists(name) {}
@@ -78,6 +78,7 @@ function App() {
             name={x.name}
             device={x.device}
             path={x.path}
+            setState={setState}
             state={state}
             status={x.status}
             select={select}
