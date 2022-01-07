@@ -1,8 +1,13 @@
+import React, { useState } from "react";
+
 import a1 from "./a1.jpg";
 import logo from "./logo.svg";
+import Row from "./Components/Row/Row";
+
 import "./App.scss";
 
 function App() {
+  const [state, setState] = useState({});
   const data = [
     {
       name: "smss.exe",
@@ -36,6 +41,15 @@ function App() {
     },
   ];
 
+  function select(newValue) {
+    let a = state;
+    a[newValue] = true;
+    setState(a);
+    console.log(a);
+  }
+
+  function exists(name) {}
+
   return (
     <div className="App">
       <div id="tools" data-testid="tools" className="">
@@ -43,7 +57,7 @@ function App() {
           []
         </div>
         <div id="count" data-testid="count">
-          Selected #
+          Selected {Object.entries(state).length}
         </div>
         <div id="" data-testid>
           Download Selected
@@ -58,7 +72,19 @@ function App() {
           <div className=" c4">Path</div>
           <div className=" c5">Status</div>
         </div>
+        {data.map((x) => (
+          <Row
+            key={x.name}
+            name={x.name}
+            device={x.device}
+            path={x.path}
+            state={state}
+            status={x.status}
+            select={select}
+          ></Row>
+        ))}
       </div>
+      {/* {state} */}
     </div>
   );
 }
