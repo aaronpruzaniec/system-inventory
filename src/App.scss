@@ -22,14 +22,20 @@ html {
     display: inline;
   }
   img {
+    width: 14px;
+    height: auto;
+    padding-right: 1em;
+    display: inline-block;
+  }
+  #download img {
     width: 10px;
     height: auto;
-    padding-right: 0.25em;
+    padding-right: 0.75em;
     display: inline-block;
   }
   #invertSelection {
     padding-left: 19px;
-    padding-right: 17px;
+    padding-right: 60px;
   }
   #count {
     padding-right: 37px;

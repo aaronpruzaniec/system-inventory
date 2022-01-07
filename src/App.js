@@ -47,10 +47,13 @@ export default function App() {
   // Generate array of entries names whos status is available
   // ex. [[anetsh.exe"],["auxtheme.dll"]]
   let key = data.data
-    .map((x) => [x.status, x.name])
-    .filter((x) => x[0] == "available")
-    .map((x) => x[1]);
-  let selectLength = Object.entries(data.selected).length;
+      .map((x) => [x.status, x.name])
+      .filter((x) => x[0] == "available")
+      .map((x) => x[1]),
+    // Number of items currently selected
+    selectLength = Object.entries(data.selected).length,
+    // Number of items currently listed
+    dataLength = Object.entries(data.data).length;
 
   function invertSelection(operation) {
     // operation is either 'all' or 'none'
@@ -85,23 +88,43 @@ export default function App() {
           {/* 2. If maximum amount of selections show input on, click deselects all */}
           {/* 3. If more than 0 items are selected, but less than maximum showed neutral */}
           {selectLength == 0 ? (
-            <img src={inputOff} onClick={() => invertSelection("all")} />
-          ) : selectLength == key.length ? (
-            <img src={inputOn} onClick={() => invertSelection("none")} />
+            <img
+              src={inputOff}
+              onClick={() => invertSelection("all")}
+              role="checkbox"
+              aria-checked="false"
+              aria-labelledby="chk1-label"
+              alt="checkbox off"
+            />
+          ) : selectLength == dataLength ? (
+            <img
+              src={inputOn}
+              onClick={() => invertSelection("none")}
+              role="checkbox"
+              aria-checked="true"
+              aria-labelledby="chk1-label"
+              alt="checkbox on"
+            />
           ) : (
-            <img src={inputNeutral} />
+            <img
+              src={inputNeutral}
+              role="checkbox"
+              aria-checked="mixed"
+              aria-labelledby="chk1-label"
+              alt="checkbox mixed"
+            />
           )}
 
           {selectLength > 0 ? "Selected " + selectLength : "None selected"}
         </div>
-        <div id="" data-testid>
+        <div id="download">
           <img src={download} />
           {"Download Selected"}
         </div>
       </div>
       <div id="directory">
         <div className="row header">
-          <div className="column">[]</div>
+          <div className="column"></div>
           <div className="column">Name</div>
           <div className="column">Device</div>
           <div className="column">Path</div>

@@ -24,7 +24,23 @@ const Player = ({ data, setData, name, status, device, path }) => {
       onClick={status == "available" ? handleRemove : null}
     >
       <div className="column">
-        <img src={data.selected[name] ? inputOn : inputOff} />
+        {data.selected[name] ? (
+          <img
+            src={inputOn}
+            role="checkbox"
+            aria-checked="true"
+            aria-labelledby={`label-${name}`}
+            alt="checkbox on"
+          />
+        ) : (
+          <img
+            src={inputOff}
+            role="checkbox"
+            aria-checked="false"
+            aria-labelledby={`label-${name}`}
+            alt="checkbox off"
+          />
+        )}
       </div>
       <div className="column">{name}</div>
       <div className="column">{device}</div>
