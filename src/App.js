@@ -63,7 +63,9 @@ export default function App() {
           []
         </div>
         <div id="count" data-testid="count">
-          Selected {Object.entries(data.selected).length}
+          {Object.entries(data.selected).length > 0
+            ? "Selected " + Object.entries(data.selected).length
+            : "None selected"}
         </div>
         <div id="" data-testid>
           Download Selected

@@ -10,9 +10,15 @@ html {
 #directory {
   .row {
     display: flex;
+    padding: 0.5em 0;
+    img {
+      width: 14px;
+      height: auto;
+    }
   }
   .c1 {
-    flex: 0 0 64px;
+    flex: 0 0 57px;
+    padding-left: 14px;
   }
   .c2 {
     flex: 0 0 166px;
@@ -21,7 +27,7 @@ html {
     flex: 0 0 166px;
   }
   .c4 {
-    flex: 0 0 166px;
+    flex: 0 0 520px;
   }
   .c5 {
     flex: 0 0 166px;
@@ -42,7 +48,4 @@ html {
   #count {
     padding-right: 80px;
   }
-}
-.selected {
-  border: 1px solid red;
 }
