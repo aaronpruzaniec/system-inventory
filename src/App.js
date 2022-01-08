@@ -6,9 +6,6 @@ import Row from "./Components/Row/Row";
 
 import "./App.scss";
 import download from "./download.svg";
-import inputOff from "./inputOff.svg";
-import inputOn from "./inputOn.svg";
-import inputNeutral from "./inputNeutral.svg";
 
 export default function App() {
   const [data, setData] = useState({
@@ -52,9 +49,20 @@ export default function App() {
       .map((x) => [x.status, x.name])
       .filter((x) => x[0] == "available")
       .map((x) => x[1]),
+    // Eligible paths for download for printing to download alert
+    paths = data.data
+      .map((x) => [x.status, x.name, x.path])
+      .filter((x) => x[0] == "available")
+      .filter((item) =>
+        Object.entries(data.selected)
+          .map((x) => x[0])
+          .includes(item[1])
+      )
+      .map((x) => x[2]),
     // Number of items currently selected
     selectLength = Object.entries(data.selected).length,
     // Number of items currently listed
+    // example ['\\Device\\HarddiskVolume2\\Windows\\System32\\netsh.exe']
     dataLength = Object.entries(data.data).length;
 
   function invertSelection(operation) {
@@ -67,6 +75,11 @@ export default function App() {
       key.map((x) => (newKey[x] = true));
       setData({ data: data.data, selected: newKey });
     }
+  }
+  function downloadSelected() {
+    paths.length == 0
+      ? alert("Please make a selection")
+      : alert(paths.toString());
   }
 
   const processList = data.data.map(({ name, device, path, status }, index) => (
@@ -105,9 +118,10 @@ export default function App() {
             <Checkbox ariaChecked="mixed" />
           )}
 
+          {/* Select count */}
           {selectLength > 0 ? "Selected " + selectLength : "None selected"}
         </div>
-        <div id="download">
+        <div id="download" onClick={downloadSelected}>
           <img src={download} alt="Download icon" />
           {"Download Selected"}
         </div>

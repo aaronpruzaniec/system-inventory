@@ -4,7 +4,7 @@ import inputOff from "../../inputOff.svg";
 import inputOn from "../../inputOn.svg";
 import inputNeutral from "../../inputNeutral.svg";
 
-const Checkbox = ({ click, src, ariaChecked, alt, instruction, width }) => {
+const Checkbox = ({ ariaChecked, click, width }) => {
   let checked;
   if (ariaChecked == false) {
     checked = inputOff;

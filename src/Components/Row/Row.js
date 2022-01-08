@@ -1,9 +1,8 @@
 import React from "react";
 
+import Checkbox from "../../Components/Checkbox/Checkbox";
 import Column from "../../Components/Column/Column";
 
-import inputOff from "../../inputOff.svg";
-import inputOn from "../../inputOn.svg";
 import "./Row.scss";
 
 const Row = ({ data, setData, name, status, device, path }) => {
@@ -26,21 +25,9 @@ const Row = ({ data, setData, name, status, device, path }) => {
     >
       <div className="column">
         {data.selected[name] ? (
-          <img
-            src={inputOn}
-            role="checkbox"
-            aria-checked="true"
-            aria-labelledby={`label-${name}`}
-            alt="checkbox on"
-          />
+          <Checkbox ariaChecked={true} />
         ) : (
-          <img
-            src={inputOff}
-            role="checkbox"
-            aria-checked="false"
-            aria-labelledby={`label-${name}`}
-            alt="checkbox off"
-          />
+          <Checkbox ariaChecked={false} />
         )}
       </div>
       <Column name={name} />
