@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import Checkbox from "./Components/Checkbox/Checkbox";
+import Column from "./Components/Column/Column";
 import Row from "./Components/Row/Row";
 
 import "./App.scss";
@@ -57,6 +59,7 @@ export default function App() {
 
   function invertSelection(operation) {
     // operation is either 'all' or 'none'
+    // inverSelector runs to invert selection
     if (operation == "none") {
       setData({ data: data.data, selected: {} });
     } else if (operation == "all") {
@@ -67,6 +70,7 @@ export default function App() {
   }
 
   const processList = data.data.map(({ name, device, path, status }, index) => (
+    // Iterate through the map to list all entries
     <div key={index}>
       <Row
         data={data}
@@ -85,50 +89,36 @@ export default function App() {
         <div id="invertSelection" data-testid="invertSelection">
           {/* Code for determining state of invert selector */}
           {/* 1. If no items are selected show input off, click adds all */}
-          {/* 2. If maximum amount of selections show input on, click deselects all */}
+          {/* 2. If maximum amount of selections show input on, click removes all */}
           {/* 3. If more than 0 items are selected, but less than maximum showed neutral */}
           {selectLength == 0 ? (
-            <img
-              src={inputOff}
-              onClick={() => invertSelection("all")}
-              role="checkbox"
-              aria-checked="false"
-              aria-labelledby="chk1-label"
-              alt="checkbox off"
+            <Checkbox
+              click={() => invertSelection("all")}
+              ariaChecked={false}
             />
           ) : selectLength == dataLength ? (
-            <img
-              src={inputOn}
-              onClick={() => invertSelection("none")}
-              role="checkbox"
-              aria-checked="true"
-              aria-labelledby="chk1-label"
-              alt="checkbox on"
+            <Checkbox
+              click={() => invertSelection("none")}
+              ariaChecked={true}
             />
           ) : (
-            <img
-              src={inputNeutral}
-              role="checkbox"
-              aria-checked="mixed"
-              aria-labelledby="chk1-label"
-              alt="checkbox mixed"
-            />
+            <Checkbox ariaChecked="mixed" />
           )}
 
           {selectLength > 0 ? "Selected " + selectLength : "None selected"}
         </div>
         <div id="download">
-          <img src={download} />
+          <img src={download} alt="Download icon" />
           {"Download Selected"}
         </div>
       </div>
       <div id="directory">
         <div className="row header">
-          <div className="column"></div>
-          <div className="column">Name</div>
-          <div className="column">Device</div>
-          <div className="column">Path</div>
-          <div className="column">Status</div>
+          <Column />
+          <Column name="Name" />
+          <Column name="Device" />
+          <Column name="Path" />
+          <Column name="Status" />
         </div>
         {processList}
       </div>

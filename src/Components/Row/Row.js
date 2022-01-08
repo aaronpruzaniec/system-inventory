@@ -1,11 +1,12 @@
 import React from "react";
 
+import Column from "../../Components/Column/Column";
+
 import inputOff from "../../inputOff.svg";
 import inputOn from "../../inputOn.svg";
-
 import "./Row.scss";
 
-const Player = ({ data, setData, name, status, device, path }) => {
+const Row = ({ data, setData, name, status, device, path }) => {
   const handleRemove = () => {
     let handleData = new Object();
     handleData.data = data.data;
@@ -42,9 +43,9 @@ const Player = ({ data, setData, name, status, device, path }) => {
           />
         )}
       </div>
-      <div className="column">{name}</div>
-      <div className="column">{device}</div>
-      <div className="column">{path} </div>
+      <Column name={name} />
+      <Column name={device} />
+      <Column name={path} />
       <div
         className={`column titleCase ${
           status == "available" ? "available" : null
@@ -56,4 +57,4 @@ const Player = ({ data, setData, name, status, device, path }) => {
   );
 };
 
-export default Player;
+export default Row;
