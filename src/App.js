@@ -50,6 +50,7 @@ export default function App() {
       .filter((x) => x[0] == "available")
       .map((x) => x[1]),
     // Eligible paths for download for printing to download alert
+    // example ['\\Device\\HarddiskVolume2\\Windows\\System32\\netsh.exe']
     paths = data.data
       .map((x) => [x.status, x.name, x.path])
       .filter((x) => x[0] == "available")
@@ -62,7 +63,6 @@ export default function App() {
     // Number of items currently selected
     selectLength = Object.entries(data.selected).length,
     // Number of items currently listed
-    // example ['\\Device\\HarddiskVolume2\\Windows\\System32\\netsh.exe']
     dataLength = Object.entries(data.data).length;
 
   function invertSelection(operation) {

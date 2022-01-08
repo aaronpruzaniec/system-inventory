@@ -20,7 +20,7 @@ const Row = ({ data, setData, name, status, device, path }) => {
 
   return (
     <div
-      className={`row body ${data.selected[name] ? "selected" : null}`}
+      className={`row body ${data.selected[name] ? "selected" : ""}`}
       onClick={status == "available" ? handleRemove : null}
     >
       <div className="column">
@@ -35,7 +35,7 @@ const Row = ({ data, setData, name, status, device, path }) => {
       <Column name={path} />
       <div
         className={`column titleCase ${
-          status == "available" ? "available" : null
+          status == "available" ? "available" : ""
         }`}
       >
         {status[0].toUpperCase() + status.substring(1)}

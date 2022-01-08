@@ -6,6 +6,7 @@ import inputNeutral from "../../inputNeutral.svg";
 
 const Checkbox = ({ ariaChecked, click, width }) => {
   let checked;
+  // Logic decides which asset to use
   if (ariaChecked == false) {
     checked = inputOff;
   } else if (ariaChecked == true) {
