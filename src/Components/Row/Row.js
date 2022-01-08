@@ -7,7 +7,7 @@ import "./Row.scss";
 
 const Row = ({ data, setData, name, status, device, path }) => {
   const handleRemove = () => {
-    let handleData = new Object();
+    let handleData = {};
     handleData.data = data.data;
     handleData.selected = data.selected;
     if (data.selected[name]) {
@@ -21,9 +21,10 @@ const Row = ({ data, setData, name, status, device, path }) => {
   return (
     <div
       className={`row body ${data.selected[name] ? "selected" : ""}`}
-      onClick={status == "available" ? handleRemove : null}
+      onClick={status === "available" ? handleRemove : null}
     >
       <div className="column">
+        {/* Show checkbox relevant to state */}
         {data.selected[name] ? (
           <Checkbox ariaChecked={true} />
         ) : (
@@ -35,7 +36,7 @@ const Row = ({ data, setData, name, status, device, path }) => {
       <Column name={path} />
       <div
         className={`column titleCase ${
-          status == "available" ? "available" : ""
+          status === "available" ? "available" : ""
         }`}
       >
         {status[0].toUpperCase() + status.substring(1)}

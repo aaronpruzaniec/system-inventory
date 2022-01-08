@@ -47,13 +47,13 @@ export default function App() {
   // ex. [[anetsh.exe"],["auxtheme.dll"]]
   let key = data.data
       .map((x) => [x.status, x.name])
-      .filter((x) => x[0] == "available")
+      .filter((x) => x[0] === "available")
       .map((x) => x[1]),
     // Eligible paths for download for printing to download alert
     // example ['\\Device\\HarddiskVolume2\\Windows\\System32\\netsh.exe']
     paths = data.data
       .map((x) => [x.status, x.name, x.path])
-      .filter((x) => x[0] == "available")
+      .filter((x) => x[0] === "available")
       .filter((item) =>
         Object.entries(data.selected)
           .map((x) => x[0])
@@ -68,16 +68,16 @@ export default function App() {
   function invertSelection(operation) {
     // operation is either 'all' or 'none'
     // inverSelector runs to invert selection
-    if (operation == "none") {
+    if (operation === "none") {
       setData({ data: data.data, selected: {} });
-    } else if (operation == "all") {
+    } else if (operation === "all") {
       let newKey = {};
       key.map((x) => (newKey[x] = true));
       setData({ data: data.data, selected: newKey });
     }
   }
   function downloadSelected() {
-    paths.length == 0
+    paths.length === 0
       ? alert("Please make a selection")
       : alert(paths.toString());
   }
@@ -104,12 +104,12 @@ export default function App() {
           {/* 1. If no items are selected show input off, click adds all */}
           {/* 2. If maximum amount of selections show input on, click removes all */}
           {/* 3. If more than 0 items are selected, but less than maximum showed neutral */}
-          {selectLength == 0 ? (
+          {selectLength === 0 ? (
             <Checkbox
               click={() => invertSelection("all")}
               ariaChecked={false}
             />
-          ) : selectLength == dataLength ? (
+          ) : selectLength === dataLength ? (
             <Checkbox
               click={() => invertSelection("none")}
               ariaChecked={true}
